@@ -28,7 +28,7 @@ export function TestimonialsEditor({ onSaved }: { onSaved: () => void }) {
 
   async function add() {
     const { error } = await supabase.from("testimonials").insert({ name_he: "שם הלקוח", text_he: "", sort_order: rows.length + 1 });
-    if (error) return toast.error("ההוספה נכשלה");
+    if (error) { toast.error("ההוספה נכשלה"); return; }
     refresh();
   }
   async function remove(id: string) {
@@ -44,7 +44,7 @@ export function TestimonialsEditor({ onSaved }: { onSaved: () => void }) {
       ),
     );
     setBusy(false);
-    if (results.some((r) => r.error)) return toast.error("השמירה נכשלה");
+    if (results.some((r) => r.error)) { toast.error("השמירה נכשלה"); return; }
     toast.success("ההמלצות נשמרו");
     refresh();
   }

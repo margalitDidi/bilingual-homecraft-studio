@@ -34,7 +34,7 @@ export function ProjectsEditor({ onSaved }: { onSaved: () => void }) {
       .select()
       .single();
     setCreating(false);
-    if (error || !data) return toast.error("לא הצלחנו ליצור פרויקט");
+    if (error || !data) { toast.error("לא הצלחנו ליצור פרויקט"); return; }
     await refresh();
     setEditing(data);
   }
@@ -54,7 +54,7 @@ export function ProjectsEditor({ onSaved }: { onSaved: () => void }) {
     if (!window.confirm(`למחוק את "${p.title_he}"? הפעולה לא ניתנת לביטול.`)) return;
     const { data: imgs } = await supabase.from("project_images").select("url").eq("project_id", p.id);
     const { error } = await supabase.from("projects").delete().eq("id", p.id);
-    if (error) return toast.error("המחיקה נכשלה");
+    if (error) { toast.error("המחיקה נכשלה"); return; }
     await Promise.all([...(imgs ?? []).map((i) => removeMedia(i.url)), removeMedia(p.cover_url)]);
     toast.success("הפרויקט נמחק");
     refresh();
@@ -147,7 +147,7 @@ function ProjectForm({ project, onDone }: { project: ProjectRow; onDone: () => v
       })
       .eq("id", p.id);
     setBusy(false);
-    if (error) return toast.error("השמירה נכשלה");
+    if (error) { toast.error("השמירה נכשלה"); return; }
     toast.success("הפרויקט נשמר");
     onDone();
   }
