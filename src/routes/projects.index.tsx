@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects/")({
   validateSearch: (s: Record<string, unknown>): { category?: Category } => {
-    const c = s.category;
+    const c = s["category"];
     return c === "kitchen" || c === "bathroom" || c === "closets" ? { category: c } : {};
   },
   loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery()),
@@ -32,7 +32,7 @@ function ProjectsPage() {
   const { t } = useLang();
   const { category } = Route.useSearch();
   const list = category ? projects.filter((p) => p.category === category) : projects;
-  const tabs: { v?: Category; label: string }[] = [
+  const tabs: { v: Category | undefined; label: string }[] = [
     { v: undefined, label: t("cat_all") },
     ...CATEGORIES.map((c) => ({ v: c, label: t(categoryKey(c)) })),
   ];
