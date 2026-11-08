@@ -54,7 +54,7 @@ function Hero() {
       </div>
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pb-16 pt-36 md:px-8">
         <Reveal>
-          <span className="glass inline-flex items-center gap-3 rounded-full border border-border px-4 py-2 text-xs tracking-[0.2em] text-primary">
+          <span className="glass eyebrow inline-flex items-center gap-3 rounded-full border border-border px-4 py-2">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {c("hero_eyebrow")}
           </span>
@@ -77,7 +77,7 @@ function Hero() {
         </Reveal>
       </div>
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 md:px-8">
-        <Reveal delay={600} className="glass grid grid-cols-3 divide-x divide-border rounded-2xl border border-border rtl:divide-x-reverse">
+        <Reveal delay={600} className="glass grid grid-cols-3 rounded-2xl border border-border [&>*+*]:border-s [&>*+*]:border-border">
           {stats.map((s) => (
             <div key={s.l} className="px-3 py-5 text-center md:px-8 md:py-7">
               <div className="font-display text-3xl text-gradient-gold md:text-5xl">{s.v}</div>

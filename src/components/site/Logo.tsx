@@ -13,7 +13,7 @@ export function Logo({ className }: { className?: string }) {
       ) : (
         <span className="flex flex-col leading-none">
           <span className="font-display text-2xl tracking-wide text-foreground md:text-[1.7rem]">{name}</span>
-          <span className="mt-1 text-[0.6rem] uppercase tracking-[0.35em] text-primary">{c("brand_tagline")}</span>
+          <span className="eyebrow mt-1.5 text-[0.6rem]">{c("brand_tagline")}</span>
         </span>
       )}
     </Link>
