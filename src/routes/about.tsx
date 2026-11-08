@@ -45,7 +45,7 @@ function AboutPage() {
         </Reveal>
       </section>
       <section className="mx-auto max-w-7xl px-5 py-10 md:px-8">
-        <div className="grid grid-cols-3 divide-x divide-border rounded-2xl border border-border rtl:divide-x-reverse">
+        <div className="grid grid-cols-3 rounded-2xl border border-border [&>*+*]:border-s [&>*+*]:border-border">
           {stats.map((s) => (
             <div key={s.l} className="px-3 py-8 text-center">
               <div className="font-display text-4xl text-gradient-gold md:text-6xl">{s.v}</div>

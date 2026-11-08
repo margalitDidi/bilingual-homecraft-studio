@@ -183,6 +183,11 @@
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--color-primary);
+  &:where([dir="rtl"] *) {
+    letter-spacing: 0.06em;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
 }
 
 @utility gold-line {
