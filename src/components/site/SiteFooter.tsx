@@ -59,7 +59,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="gold-line" />
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 pb-24 pt-6 text-xs text-muted-foreground md:flex-row md:px-8 md:ps-24">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 pb-24 pt-6 text-xs text-muted-foreground md:flex-row md:px-8">
         <span>
           © {year} {c("brand_name")} · {t("footer_rights")}
         </span>
