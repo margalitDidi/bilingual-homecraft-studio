@@ -37,7 +37,14 @@ function AuthPage() {
     setBusy(true);
     if (mode === "in") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) toast.error("פרטי הכניסה שגויים, או שהמייל עדיין לא אושר");
+      if (error) {
+        toast.error(
+          error.message.toLowerCase().includes("confirm")
+            ? "צריך לאשר את החשבון דרך הקישור שנשלח למייל"
+            : "פרטי הכניסה שגויים. בפעם הראשונה צריך קודם ליצור חשבון — לחצי על \"הרשמה\" למטה",
+          { duration: 7000 },
+        );
+      }
       else {
         toast.success("נכנסת בהצלחה");
         navigate({ to: "/admin" });
@@ -49,7 +56,10 @@ function AuthPage() {
         options: { emailRedirectTo: window.location.origin },
       });
       if (error) toast.error(error.message);
-      else toast.success("נשלח אליך מייל לאישור החשבון");
+      else {
+        toast.success("נשלח אליך מייל לאישור החשבון. אחרי האישור חוזרים לכאן ונכנסים", { duration: 9000 });
+        setMode("in");
+      }
     }
     setBusy(false);
   }
@@ -67,9 +77,12 @@ function AuthPage() {
         <Button type="submit" variant="hero" size="xl" className="w-full" disabled={busy}>
           {mode === "in" ? "כניסה" : "הרשמה"}
         </Button>
-        <button type="button" onClick={() => setMode(mode === "in" ? "up" : "in")} className="w-full text-sm text-muted-foreground hover:text-primary">
-          {mode === "in" ? "אין לך חשבון? הרשמה" : "יש לך חשבון? כניסה"}
-        </button>
+        {mode === "in" && (
+          <p className="text-center text-sm text-muted-foreground">כניסה ראשונה? קודם צריך ליצור חשבון מנהל.</p>
+        )}
+        <Button type="button" variant="ghost" className="w-full" onClick={() => setMode(mode === "in" ? "up" : "in")}>
+          {mode === "in" ? "יצירת חשבון מנהל (הרשמה)" : "יש לך חשבון? כניסה"}
+        </Button>
       </form>
     </div>
   );
