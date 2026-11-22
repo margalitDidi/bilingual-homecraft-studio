@@ -23,8 +23,15 @@ export const Route = createFileRoute("/api/public/media/$")({
             },
           },
         });
-        const { data, error } = await sb.storage.from("site-media").download(path);
-        if (error || !data) return new Response("Not found", { status: 404 });
+        // A storage failure must not take the page down: serve a plain 404 instead.
+        let data: Blob | null = null;
+        try {
+          const res = await sb.storage.from("site-media").download(path);
+          if (!res.error) data = res.data;
+        } catch {
+          data = null;
+        }
+        if (!data) return new Response("Not found", { status: 404 });
         return new Response(data, {
           headers: {
             "Content-Type": data.type || "application/octet-stream",
