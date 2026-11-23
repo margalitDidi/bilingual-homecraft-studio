@@ -1,9 +1,31 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImagePlus, Loader2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { uploadMedia } from "@/lib/media";
+import { resolveAdminMediaUrl, uploadMedia } from "@/lib/media";
 import { cn } from "@/lib/utils";
+
+/** Renders an image in the admin panel, resolving private site-media uploads via signed URLs. */
+export function AdminImage({ src, alt = "", className }: { src: string; alt?: string; className?: string }) {
+  const [resolved, setResolved] = useState(() => (src.startsWith("/api/public/media/") ? "" : src));
+
+  useEffect(() => {
+    let active = true;
+    if (!src.startsWith("/api/public/media/")) {
+      setResolved(src);
+      return;
+    }
+    resolveAdminMediaUrl(src).then((next) => {
+      if (active) setResolved(next);
+    });
+    return () => {
+      active = false;
+    };
+  }, [src]);
+
+  if (!resolved) return null;
+  return <img src={resolved} alt={alt} className={className} />;
+}
 
 /** Single image picker with preview. Calls onChange with the new URL ("" when removed). */
 export function ImageField({
@@ -47,7 +69,7 @@ export function ImageField({
       {hint && <div className="text-xs text-muted-foreground">{hint}</div>}
       <div className={cn("relative overflow-hidden rounded-xl border border-dashed border-input bg-muted/40", aspect)}>
         {value ? (
-          <img src={value} alt="" className={cn("absolute inset-0 h-full w-full", contain ? "object-contain p-4" : "object-cover")} />
+          <AdminImage src={value} className={cn("absolute inset-0 h-full w-full", contain ? "object-contain p-4" : "object-cover")} />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">אין תמונה</div>
         )}

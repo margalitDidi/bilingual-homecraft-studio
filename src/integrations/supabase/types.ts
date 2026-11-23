@@ -157,6 +157,7 @@ export type Database = {
           id: string
           name_en: string
           name_he: string
+          published: boolean
           sort_order: number
           text_en: string
           text_he: string
@@ -166,6 +167,7 @@ export type Database = {
           id?: string
           name_en?: string
           name_he?: string
+          published?: boolean
           sort_order?: number
           text_en?: string
           text_he?: string
@@ -175,6 +177,7 @@ export type Database = {
           id?: string
           name_en?: string
           name_he?: string
+          published?: boolean
           sort_order?: number
           text_en?: string
           text_he?: string

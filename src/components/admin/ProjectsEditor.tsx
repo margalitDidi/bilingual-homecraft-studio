@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { adminProjectImagesQuery, adminProjectsQuery, inputClass } from "./admin-data";
-import { ImageField } from "./ImageField";
+import { AdminImage, ImageField } from "./ImageField";
 import { removeMedia, uploadMedia } from "@/lib/media";
 import type { ProjectRow } from "@/lib/site.functions";
 import { cn } from "@/lib/utils";
@@ -74,7 +74,7 @@ export function ProjectsEditor({ onSaved }: { onSaved: () => void }) {
         {projects.map((p, i) => (
           <div key={p.id} className={cn("card-luxe overflow-hidden", !p.published && "opacity-60")}>
             <div className="relative aspect-[4/3] bg-muted">
-              {p.cover_url && <img src={p.cover_url} alt="" className="absolute inset-0 h-full w-full object-cover" />}
+              {p.cover_url && <AdminImage src={p.cover_url} className="absolute inset-0 h-full w-full object-cover" />}
               <div className="absolute top-3 start-3 flex gap-1.5">
                 {p.featured && <span className="rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground"><Star className="inline h-3 w-3" /></span>}
                 {!p.published && <span className="rounded-full bg-background/80 px-2 py-1 text-xs">מוסתר</span>}
@@ -282,7 +282,7 @@ function GalleryEditor({ projectId, onPickCover }: { projectId: string; onPickCo
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {images.map((img, i) => (
             <div key={img.id} className="group relative aspect-square overflow-hidden rounded-lg border border-border">
-              <img src={img.url} alt="" className="h-full w-full object-cover" />
+              <AdminImage src={img.url} className="h-full w-full object-cover" />
               <div className="absolute inset-x-0 bottom-0 flex justify-between gap-1 bg-background/85 p-1.5">
                 <div className="flex">
                   <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => move(i, -1)} disabled={i === 0} aria-label="קודם">

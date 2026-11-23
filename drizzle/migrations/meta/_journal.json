@@ -15,6 +15,13 @@
       "when": 1795375465887,
       "tag": "0001_add_bedroom_project_category",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795416255030,
+      "tag": "0002_tighten_testimonials_and_site_media_rls",
+      "breakpoints": true
     }
   ]
 }

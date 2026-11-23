@@ -1,6 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
 const BUCKET = "site-media";
+const MEDIA_PREFIX = "/api/public/media/";
 const MAX_SIDE = 2400;
 
 /** Shrinks large photos in the browser before upload so pages stay fast. */
@@ -35,12 +36,18 @@ export async function uploadMedia(file: File, folder: string): Promise<string> {
     upsert: false,
   });
   if (error) throw error;
-  return `/api/public/media/${path}`;
+  return `${MEDIA_PREFIX}${path}`;
+}
+
+/** Resolves a private site-media URL to a short-lived signed URL for authenticated admin previews. */
+export async function resolveAdminMediaUrl(url: string): Promise<string> {
+  if (!url.startsWith(MEDIA_PREFIX)) return url;
+  const { data } = await supabase.storage.from(BUCKET).createSignedUrl(url.slice(MEDIA_PREFIX.length), 3600);
+  return data?.signedUrl ?? url;
 }
 
 /** Removes an uploaded file if the URL points at the media library (bundled images are left alone). */
 export async function removeMedia(url: string) {
-  const prefix = "/api/public/media/";
-  if (!url.startsWith(prefix)) return;
-  await supabase.storage.from(BUCKET).remove([url.slice(prefix.length)]);
+  if (!url.startsWith(MEDIA_PREFIX)) return;
+  await supabase.storage.from(BUCKET).remove([url.slice(MEDIA_PREFIX.length)]);
 }

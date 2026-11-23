@@ -31,7 +31,7 @@ export const getSiteContent = createServerFn({ method: "GET" }).handler(async ()
     const [contentRes, projectsRes, testimonialsRes, imagesRes] = await Promise.all([
       sb.from("site_content").select("key, value_he, value_en"),
       sb.from("projects").select("*").eq("published", true).order("sort_order").order("created_at"),
-      sb.from("testimonials").select("*").order("sort_order"),
+      sb.from("testimonials").select("*").eq("published", true).order("sort_order"),
       sb.from("project_images").select("project_id"),
     ]);
 
