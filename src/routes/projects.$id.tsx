@@ -19,10 +19,10 @@ export const Route = createFileRoute("/projects/$id")({
   },
   head: () => ({
     meta: [
-      { title: "פרויקט · עיצוב פנים בהתאמה אישית" },
-      { name: "description", content: "גלריית פרויקט בעיצוב אישי — מטבחים, חדרי רחצה וארונות." },
-      { property: "og:title", content: "פרויקט · עיצוב פנים בהתאמה אישית" },
-      { property: "og:description", content: "גלריית פרויקט בעיצוב אישי — מטבחים, חדרי רחצה וארונות." },
+      { title: "פרויקט · OR KITCHENS" },
+      { name: "description", content: "גלריית פרויקט בעיצוב אישי — מטבחים, חדרי שינה, ארונות ונגרות משלימה." },
+      { property: "og:title", content: "פרויקט · OR KITCHENS" },
+      { property: "og:description", content: "גלריית פרויקט בעיצוב אישי — מטבחים, חדרי שינה, ארונות ונגרות משלימה." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -76,11 +76,16 @@ function ProjectPage() {
       )}
       {images.length > 0 && (
         <section className="mx-auto max-w-7xl px-5 pb-10 md:px-8">
-          <h2 className="eyebrow mb-8">{t("project_gallery")}</h2>
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <h2 className="eyebrow">{t("project_gallery")}</h2>
+            <span className="text-xs tabular-nums text-muted-foreground">
+              {images.length} {t("photos_count")}
+            </span>
+          </div>
           <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
             {images.map((src, i) => (
               <Reveal key={src + i} delay={(i % 3) * 100} className="mb-6 break-inside-avoid">
-                <button type="button" onClick={() => setIndex(i)} className="img-zoom block w-full overflow-hidden rounded-2xl border border-border">
+                <button type="button" onClick={() => setIndex(i)} className="img-zoom block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-border transition-colors duration-300 hover:border-primary/45">
                   <img src={src} alt={pick(p, "title")} loading="lazy" className="w-full object-cover" />
                 </button>
               </Reveal>

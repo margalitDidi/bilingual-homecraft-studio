@@ -11,10 +11,10 @@ export const Route = createFileRoute("/about")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery()),
   head: () => ({
     meta: [
-      { title: "אודות הסטודיו · עיצוב פנים ומטבחים" },
-      { name: "description", content: "הכירו את הסטודיו: גישה אישית, תכנון מדויק וליווי מלא מהסקיצה ועד המסירה." },
-      { property: "og:title", content: "אודות הסטודיו · עיצוב פנים ומטבחים" },
-      { property: "og:description", content: "הכירו את הסטודיו: גישה אישית, תכנון מדויק וליווי מלא מהסקיצה ועד המסירה." },
+      { title: "אודות · OR KITCHENS" },
+      { name: "description", content: "תכנון, עיצוב וייצור מטבחים, חדרי שינה, ארונות ונגרות בהתאמה אישית — מהרעיון ועד התקנה מושלמת." },
+      { property: "og:title", content: "אודות · OR KITCHENS" },
+      { property: "og:description", content: "תכנון, עיצוב וייצור מטבחים, חדרי שינה, ארונות ונגרות בהתאמה אישית — מהרעיון ועד התקנה מושלמת." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

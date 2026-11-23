@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDown, Bath, ChefHat, Library, Quote } from "lucide-react";
+import { ArrowDown, ArrowUpLeft, ArrowUpRight, BedDouble, ChefHat, Library, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Reveal } from "@/components/site/Reveal";
@@ -15,10 +15,10 @@ export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery()),
   head: () => ({
     meta: [
-      { title: "עיצוב מטבחים, חדרי רחצה וארונות בהתאמה אישית" },
-      { name: "description", content: "סטודיו לעיצוב פנים המתמחה במטבחים בהתאמה אישית, חדרי רחצה, ארונות וספריות לכל הבית." },
-      { property: "og:title", content: "עיצוב מטבחים, חדרי רחצה וארונות בהתאמה אישית" },
-      { property: "og:description", content: "סטודיו לעיצוב פנים המתמחה במטבחים בהתאמה אישית, חדרי רחצה, ארונות וספריות לכל הבית." },
+      { title: "OR KITCHENS · תכנון, עיצוב וייצור מטבחים ונגרות בהתאמה אישית" },
+      { name: "description", content: "תכנון, עיצוב וייצור מטבחים, חדרי שינה, ארונות ונגרות בהתאמה אישית — מהרעיון וההדמיה ועד התקנה מושלמת." },
+      { property: "og:title", content: "OR KITCHENS · תכנון, עיצוב וייצור מטבחים ונגרות בהתאמה אישית" },
+      { property: "og:description", content: "תכנון, עיצוב וייצור מטבחים, חדרי שינה, ארונות ונגרות בהתאמה אישית — מהרעיון וההדמיה ועד התקנה מושלמת." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -51,8 +51,9 @@ function Hero() {
       <div className="absolute inset-0">
         <img src={hero} alt="" className="animate-hero-zoom h-full w-full object-cover" width={1920} height={1088} />
         <div className="bg-hero-fade absolute inset-0" />
+        <div className="bg-hero-scrim absolute inset-0" />
       </div>
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pb-16 pt-36 md:px-8">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pb-10 pt-28 md:px-8 md:pb-16 md:pt-36">
         <Reveal>
           <span className="glass eyebrow inline-flex items-center gap-3 rounded-full border border-border px-4 py-2">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -60,28 +61,29 @@ function Hero() {
           </span>
         </Reveal>
         <Reveal delay={150}>
-          <h1 className="mt-8 max-w-4xl text-5xl leading-[1.05] text-ivory sm:text-6xl md:text-8xl">
+          <h1 className="mt-6 max-w-4xl text-[2.6rem] leading-[1.06] text-ivory sm:text-6xl md:mt-8 md:text-8xl">
             {c("hero_title")}
           </h1>
         </Reveal>
         <Reveal delay={300}>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ivory/80 md:text-xl">{c("hero_subtitle")}</p>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ivory/85 sm:text-lg md:mt-8 md:text-xl">{c("hero_subtitle")}</p>
         </Reveal>
-        <Reveal delay={450} className="mt-10 flex flex-wrap gap-3">
-          <Button asChild variant="hero" size="xl">
+        <Reveal delay={450} className="mt-8 flex flex-wrap gap-3 md:mt-10">
+          <Button asChild variant="hero" size="xl" className="w-full sm:w-auto">
             <Link to="/contact">{t("cta_consult")}</Link>
           </Button>
-          <Button asChild variant="glass" size="xl">
+          <Button asChild variant="glass" size="xl" className="w-full sm:w-auto">
             <Link to="/projects">{t("cta_view_projects")}</Link>
           </Button>
         </Reveal>
       </div>
-      <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 md:px-8">
-        <Reveal delay={600} className="glass grid grid-cols-3 rounded-2xl border border-border [&>*+*]:border-s [&>*+*]:border-border">
+      <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 md:px-8 md:pb-10">
+        <Reveal delay={600} className="glass relative grid grid-cols-3 overflow-hidden rounded-2xl border border-border [&>*+*]:border-s [&>*+*]:border-border">
+          <span className="gold-line pointer-events-none absolute inset-x-0 top-0" aria-hidden />
           {stats.map((s) => (
-            <div key={s.l} className="px-3 py-5 text-center md:px-8 md:py-7">
-              <div className="font-display text-3xl text-gradient-gold md:text-5xl">{s.v}</div>
-              <div className="mt-1 text-xs text-ivory/70 md:text-sm">{s.l}</div>
+            <div key={s.l} className="px-2.5 py-4 text-center md:px-8 md:py-7">
+              <div className="font-display text-2xl tabular-nums text-gradient-gold sm:text-3xl md:text-5xl">{s.v}</div>
+              <div className="mt-1 text-[0.72rem] leading-snug text-ivory/75 md:text-sm">{s.l}</div>
             </div>
           ))}
         </Reveal>
@@ -95,7 +97,7 @@ function Hero() {
 
 function Marquee() {
   const { t } = useLang();
-  const words = [t("cat_kitchen"), t("cat_bathroom"), t("cat_closets"), t("cat_kitchen"), t("cat_bathroom"), t("cat_closets")];
+  const words = [t("cat_kitchen"), t("cat_bedroom"), t("cat_closets"), t("cat_kitchen"), t("cat_bedroom"), t("cat_closets")];
   return (
     <div className="overflow-hidden border-y border-border py-6" dir="ltr">
       <div className="animate-marquee flex w-max gap-12 whitespace-nowrap">
@@ -120,9 +122,9 @@ function AboutTeaser() {
         <div className="img-zoom overflow-hidden rounded-3xl border border-border">
           <img src={img} alt={c("about_title")} loading="lazy" className="aspect-[4/5] w-full object-cover" />
         </div>
-        <div className="card-luxe absolute -bottom-8 end-6 hidden max-w-[220px] p-6 md:block">
-          <div className="font-display text-5xl text-gradient-gold">{c("stat_2_value")}</div>
-          <div className="mt-1 text-sm text-muted-foreground">{c("stat_2_label")}</div>
+        <div className="card-luxe absolute -bottom-8 end-6 hidden max-w-[235px] p-6 md:block">
+          <div className="font-display text-5xl text-gradient-gold">360°</div>
+          <div className="mt-1 text-sm leading-snug text-muted-foreground">{t("about_badge_label")}</div>
         </div>
       </Reveal>
       <div>
@@ -140,32 +142,35 @@ function AboutTeaser() {
 
 const serviceMeta: { cat: Category; icon: typeof ChefHat; fallback: string }[] = [
   { cat: "kitchen", icon: ChefHat, fallback: "/images/kitchen-olive.jpg" },
-  { cat: "bathroom", icon: Bath, fallback: "/images/bathroom-travertine.jpg" },
-  { cat: "closets", icon: Library, fallback: "/images/library-oak.jpg" },
+  { cat: "bedroom", icon: BedDouble, fallback: "/images/bedroom-suite.jpg" },
+  { cat: "closets", icon: Library, fallback: "/images/living-media-wall.jpg" },
 ];
 
 function Services() {
   const { c, projects } = useSite();
-  const { t } = useLang();
+  const { t, dir } = useLang();
+  const Arrow = dir === "rtl" ? ArrowUpLeft : ArrowUpRight;
   return (
-    <section className="relative py-28 md:py-36">
+    <section className="section-band relative py-24 md:py-36">
       <div className="bg-radial-glow pointer-events-none absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading eyebrow={t("section_services")} title={t("section_services_title")} align="center" />
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {serviceMeta.map(({ cat, icon: Icon, fallback }, i) => {
             const cover = projects.find((p) => p.category === cat && p.cover_url)?.cover_url || fallback;
-            const key = cat === "closets" ? "service_closets" : cat === "bathroom" ? "service_bathroom" : "service_kitchen";
+            const key = cat === "closets" ? "service_closets" : cat === "bedroom" ? "service_bedroom" : "service_kitchen";
+            const title = c(`${key}_title`) || (cat === "bedroom" ? c("service_bathroom_title") : "");
+            const text = c(`${key}_text`) || (cat === "bedroom" ? c("service_bathroom_text") : "");
             return (
               <Reveal key={cat} delay={i * 120}>
                 <Link
                   to="/projects"
                   search={{ category: cat }}
-                  className={cn("img-zoom group relative block overflow-hidden rounded-3xl border border-border", i === 0 && "md:-mt-0", i === 1 && "md:mt-12")}
+                  className={cn("img-zoom group relative block overflow-hidden rounded-3xl border border-border transition-colors duration-500 hover:border-primary/45", i === 1 && "md:mt-10")}
                 >
                   <div className="relative aspect-[3/4]">
-                    <img src={cover} alt={c(`${key}_title`)} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
+                    <img src={cover} alt={title} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/55 to-ink/10" />
                   </div>
                   <div className="absolute inset-0 flex flex-col justify-between p-7">
                     <span className="glass flex h-14 w-14 items-center justify-center rounded-full border border-border text-primary">
@@ -173,8 +178,12 @@ function Services() {
                     </span>
                     <div>
                       <span className="font-display text-sm text-primary">0{i + 1}</span>
-                      <h3 className="mt-2 text-4xl text-ivory">{c(`${key}_title`)}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-ivory/75">{c(`${key}_text`)}</p>
+                      <h3 className="mt-2 text-3xl text-ivory md:text-4xl">{title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-ivory/80">{text}</p>
+                      <span className="mt-5 inline-flex items-center gap-2 text-xs font-medium tracking-wide text-primary transition-transform duration-300 group-hover:translate-x-[-4px]">
+                        {t("cta_explore")}
+                        <Arrow className="h-4 w-4" />
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -188,12 +197,12 @@ function Services() {
 }
 
 function Featured() {
-  const { projects } = useSite();
+  const { projects, galleryCounts } = useSite();
   const { t } = useLang();
   const featured = (projects.filter((p) => p.featured).length ? projects.filter((p) => p.featured) : projects).slice(0, 5);
   if (!featured.length) return null;
   return (
-    <section className="mx-auto max-w-7xl px-5 py-28 md:px-8 md:py-36">
+    <section className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-36">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <SectionHeading eyebrow={t("section_featured")} title={t("section_featured_title")} />
         <Reveal>
@@ -208,7 +217,7 @@ function Featured() {
           const aspect = i === 0 ? "aspect-[4/5] md:aspect-auto md:h-full md:min-h-[640px]" : i < 3 ? "aspect-[4/5] md:aspect-auto md:h-[308px]" : "aspect-[4/3]";
           return (
             <Reveal key={p.id} delay={(i % 3) * 120} className={span}>
-              <ProjectCard project={p} aspect={aspect} className="h-full" />
+              <ProjectCard project={p} aspect={aspect} photoCount={galleryCounts[p.id]} className="h-full" />
             </Reveal>
           );
         })}
@@ -222,7 +231,7 @@ function Process() {
   const { t } = useLang();
   const steps = [1, 2, 3, 4].map((n) => ({ n, title: c(`process_${n}_title`), text: c(`process_${n}_text`) }));
   return (
-    <section className="border-y border-border bg-card/40 py-28 md:py-36">
+    <section className="section-band py-24 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading eyebrow={t("section_process")} title={c("process_title")} align="center" />
         <div className="relative mt-20 grid gap-10 md:grid-cols-4 md:gap-6">

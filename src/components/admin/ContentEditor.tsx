@@ -46,12 +46,12 @@ const groups: Group[] = [
   {
     title: "תחומי התמחות",
     fields: [
-      { key: "service_kitchen_title", label: "מטבחים – כותרת" },
-      { key: "service_kitchen_text", label: "מטבחים – תיאור", long: true },
-      { key: "service_bathroom_title", label: "חדרי רחצה – כותרת" },
-      { key: "service_bathroom_text", label: "חדרי רחצה – תיאור", long: true },
-      { key: "service_closets_title", label: "ארונות וספריות – כותרת" },
-      { key: "service_closets_text", label: "ארונות וספריות – תיאור", long: true },
+      { key: "service_kitchen_title", label: "מטבחי יוקרה – כותרת" },
+      { key: "service_kitchen_text", label: "מטבחי יוקרה – תיאור", long: true },
+      { key: "service_bedroom_title", label: "חדרי שינה וארונות – כותרת" },
+      { key: "service_bedroom_text", label: "חדרי שינה וארונות – תיאור", long: true },
+      { key: "service_closets_title", label: "ספריות ונגרות משלימה – כותרת" },
+      { key: "service_closets_text", label: "ספריות ונגרות משלימה – תיאור", long: true },
     ],
   },
   {

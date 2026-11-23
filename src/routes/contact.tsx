@@ -12,10 +12,10 @@ export const Route = createFileRoute("/contact")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteContentQuery()),
   head: () => ({
     meta: [
-      { title: "צור קשר · תיאום פגישת ייעוץ לעיצוב מטבח" },
-      { name: "description", content: "השאירו פרטים לתיאום פגישת ייעוץ לעיצוב מטבח, חדר רחצה או ארונות בהתאמה אישית." },
-      { property: "og:title", content: "צור קשר · תיאום פגישת ייעוץ לעיצוב מטבח" },
-      { property: "og:description", content: "השאירו פרטים לתיאום פגישת ייעוץ לעיצוב מטבח, חדר רחצה או ארונות בהתאמה אישית." },
+      { title: "צור קשר · OR KITCHENS" },
+      { name: "description", content: "תיאום פגישת ייעוץ ותכנון למטבחים, חדרי שינה, ארונות ונגרות בהתאמה אישית." },
+      { property: "og:title", content: "צור קשר · OR KITCHENS" },
+      { property: "og:description", content: "תיאום פגישת ייעוץ ותכנון למטבחים, חדרי שינה, ארונות ונגרות בהתאמה אישית." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

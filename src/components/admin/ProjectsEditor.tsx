@@ -12,7 +12,7 @@ import { removeMedia, uploadMedia } from "@/lib/media";
 import type { ProjectRow } from "@/lib/site.functions";
 import { cn } from "@/lib/utils";
 
-const catLabel: Record<string, string> = { kitchen: "מטבחים", bathroom: "חדרי רחצה", closets: "ארונות וספריות" };
+const catLabel: Record<string, string> = { kitchen: "מטבחים", bedroom: "חדרי שינה וארונות", closets: "ספריות ונגרות משלימה" };
 
 export function ProjectsEditor({ onSaved }: { onSaved: () => void }) {
   const { data: projects } = useSuspenseQuery(adminProjectsQuery);

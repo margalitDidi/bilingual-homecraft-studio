@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { z } from "zod";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/lib/i18n";
+import { useSite } from "@/lib/use-site";
 import { cn } from "@/lib/utils";
 
 const schema = z.object({
@@ -19,13 +20,15 @@ const fieldClass =
 
 export function ContactForm({ className }: { className?: string }) {
   const { t } = useLang();
+  const { raw } = useSite();
+  const wa = raw("contact_whatsapp").replace(/\D/g, "");
   const [type, setType] = useState("kitchen");
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [invalid, setInvalid] = useState<string[]>([]);
 
   const types = [
     { v: "kitchen", label: t("cat_kitchen") },
-    { v: "bathroom", label: t("cat_bathroom") },
+    { v: "bedroom", label: t("cat_bedroom") },
     { v: "closets", label: t("cat_closets") },
     { v: "other", label: t("form_other") },
   ];
@@ -101,6 +104,17 @@ export function ContactForm({ className }: { className?: string }) {
       <Button type="submit" variant="hero" size="xl" className="w-full" disabled={status === "sending"}>
         {status === "sending" ? t("form_sending") : t("form_submit")}
       </Button>
+      {wa && (
+        <a
+          href={`https://wa.me/${wa}`}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-center gap-2 pt-1 text-sm text-muted-foreground transition-colors hover:text-primary"
+        >
+          <MessageCircle className="h-4 w-4 text-primary" />
+          {t("form_whatsapp_alt")}
+        </a>
+      )}
     </form>
   );
 }

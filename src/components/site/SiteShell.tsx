@@ -20,9 +20,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
           target="_blank"
           rel="noreferrer"
           aria-label={t("cta_whatsapp")}
-          className="bg-gradient-gold shadow-gold fixed bottom-5 end-5 z-40 flex h-14 w-14 items-center justify-center rounded-full text-primary-foreground transition-transform hover:scale-110"
+          className="bg-gradient-gold shadow-gold fixed bottom-4 end-4 z-40 flex h-12 w-12 items-center justify-center rounded-full text-primary-foreground transition-transform hover:scale-110 md:bottom-5 md:end-5 md:h-14 md:w-14"
         >
-          <MessageCircle className="h-6 w-6" />
+          <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
         </a>
       )}
     </div>

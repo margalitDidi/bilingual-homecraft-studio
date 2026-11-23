@@ -17,10 +17,10 @@ export function useSite() {
   return { ...data, c, raw };
 }
 
-export type Category = "kitchen" | "bathroom" | "closets";
-export const CATEGORIES: Category[] = ["kitchen", "bathroom", "closets"];
+export type Category = "kitchen" | "bedroom" | "closets";
+export const CATEGORIES: Category[] = ["kitchen", "bedroom", "closets"];
 export const categoryKey = (cat: string) =>
-  (cat === "bathroom" ? "cat_bathroom" : cat === "closets" ? "cat_closets" : "cat_kitchen") as
+  (cat === "bedroom" || cat === "bathroom" ? "cat_bedroom" : cat === "closets" ? "cat_closets" : "cat_kitchen") as
     | "cat_kitchen"
-    | "cat_bathroom"
+    | "cat_bedroom"
     | "cat_closets";

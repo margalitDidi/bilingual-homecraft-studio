@@ -28,10 +28,11 @@ export type TestimonialRow = Database["public"]["Tables"]["testimonials"]["Row"]
 export const getSiteContent = createServerFn({ method: "GET" }).handler(async () => {
   const sb = publicClient();
   try {
-    const [contentRes, projectsRes, testimonialsRes] = await Promise.all([
+    const [contentRes, projectsRes, testimonialsRes, imagesRes] = await Promise.all([
       sb.from("site_content").select("key, value_he, value_en"),
       sb.from("projects").select("*").eq("published", true).order("sort_order").order("created_at"),
       sb.from("testimonials").select("*").order("sort_order"),
+      sb.from("project_images").select("project_id"),
     ]);
 
     // The backend is sometimes briefly unreachable. Never blank the page: keep
@@ -44,14 +45,22 @@ export const getSiteContent = createServerFn({ method: "GET" }).handler(async ()
       console.warn("[site] content unavailable, using built-in text:", contentRes.error?.message ?? "empty");
     }
 
+    const galleryCounts: Record<string, number> = {};
+    if (!imagesRes.error && imagesRes.data) {
+      for (const row of imagesRes.data) {
+        galleryCounts[row.project_id] = (galleryCounts[row.project_id] ?? 0) + 1;
+      }
+    }
+
     return {
       content: Object.keys(content).length ? content : DEFAULT_CONTENT,
       projects: (projectsRes.error ? null : projectsRes.data) as ProjectRow[] | null ?? [],
       testimonials: (testimonialsRes.error ? null : testimonialsRes.data) as TestimonialRow[] | null ?? [],
+      galleryCounts,
     };
   } catch (e) {
     console.warn("[site] backend unreachable, serving built-in content:", e instanceof Error ? e.message : e);
-    return { content: DEFAULT_CONTENT, projects: [], testimonials: [] };
+    return { content: DEFAULT_CONTENT, projects: [], testimonials: [], galleryCounts: {} as Record<string, number> };
   }
 });
 
